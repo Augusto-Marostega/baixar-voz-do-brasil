@@ -50,17 +50,16 @@ def baixar_audio(audio_list, diretorio_destino="baixados"):
                 # Verifica se o request foi bem-sucedido
                 if response.status_code == 200:
                     total_tamanho = int(response.headers.get('content-length', 0))  # Tamanho total do arquivo
-                    #bytes_baixados = 0  # Bytes baixados até agora
 
                     # Abre o arquivo para escrever os dados
                     with open(caminho_arquivo_temp, 'wb') as f:  # Abre arquivo como escrita em formato binário
                         # Barra de progresso para o download do arquivo
+                        logging.info(f"Iniciando download do arquivo '{nome_arquivo_final}' pelo link '{audio.url_down_mp3}'.")
                         with tqdm(total=total_tamanho, unit='B', unit_scale=True, desc=nome_arquivo_temp,
                                   dynamic_ncols=True) as pbar_arquivo:
                             for chunk in response.iter_content(chunk_size=1024*1024):  # Baixa o arquivo em pedaços
                                 if chunk:
                                     f.write(chunk)  # Grava no arquivo
-                                    #bytes_baixados += len(chunk)
                                     pbar_arquivo.update(len(chunk))  # Atualiza a barra de progresso do arquivo
                                     pbar_arquivo.set_postfix()
                     if verificar_integridade_arquivo(caminho_arquivo_temp, total_tamanho):
