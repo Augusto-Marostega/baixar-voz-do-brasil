@@ -20,7 +20,7 @@ logging.basicConfig(
 def main():
     # Configurar os dias para buscar os áudios
     url_site = "https://radiogov.ebc.com.br/programas/a-voz-do-brasil-download"
-    dias = 3  # Exemplo: Baixar áudios dos últimos 3 dias
+    dias = 1  # Exemplo: Baixar áudios dos últimos 3 dias
     diretorio_destino = r"baixados"  # Diretório de destino
 
     # Obter a lista de áudios
